@@ -17,7 +17,7 @@ body {
     align-items:center;
     max-width: 680px;
     margin: 0 auto;
-    padding: 10vh 5vh;
+    padding: 10vh 16px;
     column-gap: 5vh;
 }
 
