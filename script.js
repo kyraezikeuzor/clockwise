@@ -1,6 +1,17 @@
 function getSpeedValue() {
-    document.getElementById("speedSlider").addEventListener("input", function() {
-        document.getElementById("speedValue").textContent = Math.round(this.value * 100) + "%";
+    const slider = document.getElementById("speedSlider");
+    
+    // Set initial progress
+    const initialPercentage = (slider.value / slider.max) * 100;
+    slider.style.background = `linear-gradient(to right, #3877e3 0%, #3877e3 ${initialPercentage}%, #e8eef9 ${initialPercentage}%, #e8eef9 100%)`;
+    
+    slider.addEventListener("input", function() {
+        const value = this.value;
+        document.getElementById("speedValue").textContent = Math.round(value * 100) + "%";
+        
+        // Update the progress bar
+        const percentage = (value / this.max) * 100;
+        this.style.background = `linear-gradient(to right, #3877e3 0%, #3877e3 ${percentage}%, #e8eef9 ${percentage}%, #e8eef9 100%)`;
     });
 }
 
