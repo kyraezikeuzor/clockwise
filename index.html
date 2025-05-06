@@ -5,24 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clockwise</title>
     <link rel="stylesheet" type="text/css" href="styles.css"/>
-    <script defer src="script.js"></script>
+    <script defer src="script.js">displayFliqlo()</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <header>
+        <h1>Clockwise</h1>
+        <p>
+            Calculate how much <a href="https://en.wikipedia.org/wiki/Time_dilation">time slows down</a> for a fast-moving object (like a spaceship or particle) compared to a stationary observer, using <a href="https://en.wikipedia.org/wiki/Theory_of_relativity#:~:text=Special%20relativity,-Main%20article%3A%20Special&text=The%20laws%20of%20physics%20are,motion%20of%20the%20light%20source.">Einstein's theory of relativity</a>.        
+        </p>
+    </header>
     <main>
-        <div id="toggle">
-            <button id="button1" onclick="displayFliqlo()">Fliqlo</button>
-            <button id="button2" onclick="displayCircle()">Circle</button>
+        <div class="container">
+            <label>How fast are you traveling?</label>
+            <input type="range" min="0" max="1" step="0.05" width="400px" id="speedSlider">
         </div>
-        <div id="clock1">
-            <div class="section" id="hours"></div>
-            <div class="section" id="minutes"></div>
-            <div class="section" id="seconds"></div>
-            <div class="section" id="time"></div>
+        <div class="container speedBox">
+            <div>
+                <p id="speedLabel">
+                    <span id="speedValue">0%</span> light speed
+                </p>
+                <p id="speedExample">
+                    <span id="speedExampleContent">Standing still (like Earth)</span>
+                </p>
+            </div>
+            <img 
+                src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/ee63a2847023d573107982107171c7fed68e3cb0_image.png" 
+                alt="Earth from space" 
+                id="speedExampleImage"
+            >
         </div>
-        <div disabled=true id="clock2">
-            <div id="line1">line</div>
-            <div id="line2">line</div>
+        <div class="container"> 
+            <button id="calculateBtn" onclick="calculateTimeDilation(speedSlider.value)">
+                See Time Effect
+            </button>
+            
+            <div id="result">
+                At this speed, 1 year for you = <span id="earthTime">1.01 years</span> on Earth!
+            </div>
         </div>
+        
     </main>
 </body>
 </html>

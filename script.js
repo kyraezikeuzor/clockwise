@@ -1,78 +1,183 @@
-// Hide Second clock
-document.getElementById("clock2").style.display = "none";
+function getSpeedValue() {
+    document.getElementById("speedSlider").addEventListener("input", function() {
+        document.getElementById("speedValue").textContent = Math.round(this.value * 100) + "%";
+    });
+}
 
-//Hide Fliqlo Button
-document.getElementById("button1").disabled = true;
+function getSpeedExample() {
+    document.getElementById("speedSlider").addEventListener("input", function() {
+        for (let i = 0; i < lightSpeedExamples.length; i++) {
+            if (this.value == lightSpeedExamples[i].percent) {
+                document.getElementById("speedExampleContent").textContent = lightSpeedExamples[i].description;
+                document.getElementById("speedExampleImage").src = lightSpeedExamples[i].image;
+            }
+        }
+    });
 
-function displayCircle() {
-    document.getElementById("clock1").style.display = "none";
-    document.getElementById("clock2").style.display = "flex";
-    document.getElementById("button1").disabled = false;
-    document.getElementById("button2").disabled = true;
+}
+
+function calculateTimeDilation() {
+    document.getElementById("calculateBtn").addEventListener("click", function() {
+        let yearsForEarth = 1;
+        let percentSpeedOfLight = document.getElementById("speedSlider").value
+        let relativeYearsExperienced = yearsForEarth * Math.sqrt(1-(percentSpeedOfLight*percentSpeedOfLight))
+        document.getElementById("earthTime").innerHTML = relativeYearsExperienced.toFixed(2) + " years"
+
+    });
 }
 
 
-function displayFliqlo() {
-    document.getElementById("clock1").style.display = "flex";
-    document.getElementById("clock2").style.display = "none";
-    document.getElementById("button1").disabled = true;
-    document.getElementById("button2").disabled = false;
-}
+getSpeedExample()
+getSpeedValue()
+calculateTimeDilation()
 
-function setClock() {
 
-    let hour = new Date().getHours() % 12;
-    let hours; 
-
-    if (hour == 0 || hour == 12) {
-        hours = 12;
-    }
-    else {
-        hours = hour;
-    }
-
-    let minutes = new Date().getMinutes() % 60;
-    let seconds = new Date().getSeconds() % 60;
-
-    if (new Date().getMinutes() < 10)
+const lightSpeedExamples = [
     {
-        minutes = "0" + minutes;
-    }
-
-    if (new Date().getSeconds() < 10)
+      percent: 0,
+      speed: "0 km/s",
+      description: "Standing still (like Earth)",
+      image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/ee63a2847023d573107982107171c7fed68e3cb0_image.png",
+      alt: "Earth from space"
+    },
     {
-        seconds = "0" + seconds;
-    }
-
-    if (new Date().getHours() < 12)
+      percent: 0.5,
+      speed: "~1,500,000 km/s",
+      description: "Future sci-fi shuttle speed",
+      image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/3ada29febe452e5d160452a04f8cb8f29694c03a_image.png",
+      alt: "Generic futuristic spacecraft"
+    },
     {
-        timeOfDay = "AM";
-    } 
-    else 
+      percent: 0.10,
+      speed: "~3,000,000 km/s",
+      description: "Star Wars: Millennium Falcon in hyperspace",
+      image: "https://hc-cdn.hel1.your-objectstorage.com/s/v3/e6587d90c42f72eb456360ef0c5378528b10448d_image.png",
+      alt: "Millennium Falcon jumping to lightspeed"
+    },
     {
-        timeOfDay = "PM";
+      percent: 0.15,
+      speed: "~4,500,000 km/s",
+      description: "The Expanse: Rocinante at high burn",
+      image: "https://example.com/images/rocinante.jpg",
+      alt: "Rocinante spaceship firing engines"
+    },
+    {
+      percent: 0.20,
+      speed: "~6,000,000 km/s",
+      description: "Battlestar Galactica FTL jump speed",
+      image: "https://example.com/images/galactica.jpg",
+      alt: "Battlestar Galactica jumping"
+    },
+    {
+      percent: 0.25,
+      speed: "~7,500,000 km/s",
+      description: "Elite Dangerous: Frame Shift Drive",
+      image: "https://example.com/images/elite-dangerous.jpg",
+      alt: "Spaceship in supercruise"
+    },
+    {
+      percent: 0.30,
+      speed: "~9,000,000 km/s",
+      description: "Stargate: Prometheus at max speed",
+      image: "https://example.com/images/prometheus.jpg",
+      alt: "Prometheus spaceship in flight"
+    },
+    {
+      percent: 0.35,
+      speed: "~10,500,000 km/s",
+      description: "Halo: Covenant slipspace rupture",
+      image: "https://example.com/images/covenant-ship.jpg",
+      alt: "Covenant ship entering slipspace"
+    },
+    {
+      percent: 0.40,
+      speed: "~12,000,000 km/s",
+      description: "Mass Effect: Normandy SR-2 at FTL",
+      image: "https://example.com/images/normandy.jpg",
+      alt: "Normandy SR-2 in mass relay"
+    },
+    {
+      percent: 0.45,
+      speed: "~13,500,000 km/s",
+      description: "Star Citizen: Quantum Travel",
+      image: "https://example.com/images/star-citizen.jpg",
+      alt: "Ship in quantum travel tunnel"
+    },
+    {
+      percent: 0.50,
+      speed: "~15,000,000 km/s",
+      description: "Interstellar: Endurance cruise speed",
+      image: "https://example.com/images/endurance.jpg",
+      alt: "Endurance near Gargantua"
+    },
+    {
+      percent: 0.55,
+      speed: "~16,500,000 km/s",
+      description: "Doctor Who: TARDIS in flight",
+      image: "https://example.com/images/tardis.jpg",
+      alt: "TARDIS flying through space"
+    },
+    {
+      percent: 0.60,
+      speed: "~18,000,000 km/s",
+      description: "Star Trek: Warp Factor 9",
+      image: "https://example.com/images/enterprise.jpg",
+      alt: "USS Enterprise at warp"
+    },
+    {
+      percent: 0.65,
+      speed: "~19,500,000 km/s",
+      description: "Farscape: Starburst velocity",
+      image: "https://example.com/images/farscape.jpg",
+      alt: "Moya in starburst"
+    },
+    {
+      percent: 0.70,
+      speed: "~21,000,000 km/s",
+      description: "Babylon 5: Jumpgate transit",
+      image: "https://example.com/images/babylon5.jpg",
+      alt: "Ship entering jumpgate"
+    },
+    {
+      percent: 0.75,
+      speed: "~22,500,000 km/s",
+      description: "Star Trek: Transwarp speed",
+      image: "https://example.com/images/transwarp.jpg",
+      alt: "Borg cube at transwarp"
+    },
+    {
+      percent: 0.80,
+      speed: "~24,000,000 km/s",
+      description: "Warhammer 40K: Warp travel",
+      image: "https://example.com/images/imperial-ship.jpg",
+      alt: "Imperial ship in the warp"
+    },
+    {
+      percent: 0.85,
+      speed: "~25,500,000 km/s",
+      description: "Andromeda: Slipstream velocity",
+      image: "https://example.com/images/andromeda.jpg",
+      alt: "Andromeda Ascendant"
+    },
+    {
+      percent: 0.90,
+      speed: "~27,000,000 km/s",
+      description: "Back to the Future: DeLorean time-jump speed",
+      image: "https://example.com/images/delorean.jpg",
+      alt: "DeLorean leaving fire trails"
+    },
+    {
+      percent: 0.95,
+      speed: "~28,500,000 km/s",
+      description: "Event Horizon: Hell dimension velocity",
+      image: "https://example.com/images/event-horizon.jpg",
+      alt: "Event Horizon spaceship"
+    },
+    {
+      percent: 100,
+      speed: "30,000,000 km/s (exact lightspeed)",
+      description: "Theoretical limit: You are now light",
+      image: "https://example.com/images/photon.jpg",
+      alt: "Abstract light particle"
     }
-
-    //set content
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
-    document.getElementById("time").innerHTML = timeOfDay;
-    setTimeout(setClock, 1000);
-}
-
-setClock();
-
-
-function rotateClock() {
-    let sec = new Date().getSeconds();
-    let rotate = 90 + sec * 6;
-    let rotateText = "rotate(" + rotate + "deg)";
-
-    document.getElementById("line1").innerHTML = sec;
-    document.querySelector("#line1").style.transform = rotateText;
-    
-    setTimeout(rotateClock, 1000);
-}
-
-rotateClock();
+  ];
